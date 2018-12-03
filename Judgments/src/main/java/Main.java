@@ -16,7 +16,7 @@ public class Main {
         //}
 
         StringToJsonObject parser = new StringToJsonObject();
-        List<Judgment> judgments = new ArrayList<>();
-        judgments = parser.createJudgmentList(jsons);
+
+        List<Judgment> judgments = parser.createJudgmentList(jsons);
     }
 }

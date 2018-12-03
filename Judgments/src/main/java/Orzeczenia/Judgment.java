@@ -10,7 +10,7 @@ public class Judgment {
     public JudgmentType judgmentType;
     public List<Judge> judges;
     public Source source;
-    public String courtReporters;
+    public List<String> courtReporters;
     public String decision;
     public String summary;
     public String textContent;
@@ -22,7 +22,7 @@ public class Judgment {
     public String meansOfAppeal;
     public String judgmentResult;
     public List<String> lowetCourtJudgments;
-    public List<String> dissentingOpinions;
+    public List<DissentingOpinion> dissentingOpinions;
     public String judgmentDate;
 
     public void printRubrum(){

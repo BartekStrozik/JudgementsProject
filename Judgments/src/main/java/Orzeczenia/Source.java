@@ -8,5 +8,5 @@ public class Source {
     public String judgmentId;
     public String publisher;
     public String reviser;
-    public Date publicationDate;
+    public String publicationDate;
 }
