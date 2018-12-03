@@ -11,9 +11,9 @@ public class Main {
         JsonFileToString jsonFileToString = new JsonFileToString();
         File directory = new File("json");
         List<String> jsons = jsonFileToString.getStringsFromJsonFiles(directory);
-        for(String string : jsons){
-            System.out.println(string);
-        }
+        //for(String string : jsons){
+        //    System.out.println(string);
+        //}
 
         StringToJsonObject parser = new StringToJsonObject();
         List<Judgment> judgments = new ArrayList<>();
