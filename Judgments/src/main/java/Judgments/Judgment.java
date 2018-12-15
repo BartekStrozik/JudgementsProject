@@ -25,7 +25,6 @@ public class Judgment {
     public String judgmentDate;
 
     public String toString(){
-        //nie wypisywać, zapisać do jednego obiektu
         StringBuilder stringBuilder = new StringBuilder();
 
         for(Integer i=0; i<this.courtCases.size(); i++) {

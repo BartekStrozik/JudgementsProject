@@ -6,7 +6,7 @@ public class Judge {
     public String name;
     public String function;
     public List<SpecialRole> specialRoles;
-    //public Integer amountOfJudgments;
+    public Integer amount;
 
     public boolean equals(Object other){
         if (this == other)

@@ -1,12 +1,13 @@
 package Judgments.Algorithms;
 
+import Judgments.Data.CommonData;
 import Judgments.Judgment;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-public class VIIMonths {
+public class VIIMonths extends Request{
     public HashMap<String, List<Judgment>> months = new HashMap<>();
 
     public void initializeMap(List<Judgment> judgments){
@@ -63,6 +64,19 @@ public class VIIMonths {
                     break;
                 default: break;
             }
+        }
+    }
+
+    public void getAnswer(String month){
+        initializeMap(CommonData.judgmentList);
+        System.out.println("Liczba orzeczeń wydanych w miesiącu "+month+":");
+        System.out.println(months.get(month).size());
+    }
+
+    @Override
+    public void launchRequest(String[] args) {
+        for(int i=0; i<args.length; i++) {
+            getAnswer(args[i]);
         }
     }
 }

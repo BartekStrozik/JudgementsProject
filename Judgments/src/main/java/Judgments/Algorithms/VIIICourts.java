@@ -1,6 +1,7 @@
 package Judgments.Algorithms;
 
 import Judgments.CourtType;
+import Judgments.Data.CommonData;
 import Judgments.Judgment;
 
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class VIIICourts {
+public class VIIICourts extends Request{
     public HashMap<CourtType, List<Judgment>> courtTypeMap = new HashMap<>();
 
     public void initializeHashMap(List<Judgment> judgments){
@@ -40,6 +41,38 @@ public class VIIICourts {
                     courtTypeMap.get(CourtType.DEFAULT).add(judgment);
                     break;
             }
+        }
+    }
+
+    private void getAnswer(String courtType){
+        initializeHashMap(CommonData.judgmentList);
+        System.out.println("Liczba orzeczeń typu "+courtType+":");
+        switch(courtType){
+            case "COMMON":
+                System.out.println(courtTypeMap.get(CourtType.COMMON).size());
+                break;
+            case "SUPREME":
+                System.out.println(courtTypeMap.get(CourtType.SUPREME).size());
+                break;
+            case "ADMINISTRATIVE":
+                System.out.println(courtTypeMap.get(CourtType.ADMINISTRATIVE).size());
+                break;
+            case "CONSTITUTIONAL_TRIBUNAL":
+                System.out.println(courtTypeMap.get(CourtType.CONSTITUTIONAL_TRIBUNAL).size());
+                break;
+            case "NATIONAL_APPEAL_CHAMBER":
+                System.out.println(courtTypeMap.get(CourtType.NATIONAL_APPEAL_CHAMBER).size());
+                break;
+            case "DEFAULT":
+                System.out.println(courtTypeMap.get(CourtType.DEFAULT).size());
+                break;
+        }
+    }
+
+    @Override
+    public void launchRequest(String[] args) {
+        for(int i=0; i<args.length; i++) {
+            getAnswer(args[i]);
         }
     }
 }
