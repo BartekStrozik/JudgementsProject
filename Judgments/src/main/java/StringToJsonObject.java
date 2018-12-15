@@ -1,4 +1,4 @@
-import Orzeczenia.Judgment;
+import Judgments.Judgment;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -16,7 +16,7 @@ public class StringToJsonObject {
     public List<Judgment> createJudgmentList(List<String> stringFiles){
         List<Judgment> result = new ArrayList<>();
         for(String jsonFile : stringFiles){
-            System.out.println(jsonFile.substring(550,650));
+            //System.out.println(jsonFile.substring(550,650));
             List<Judgment> judgmentObjects = parse(jsonFile);
             for(Judgment judgment : judgmentObjects){
                 result.add(judgment);
