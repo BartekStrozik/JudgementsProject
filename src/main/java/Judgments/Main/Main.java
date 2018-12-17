@@ -19,7 +19,5 @@ public class Main {
 
         Requests requests = new Requests();
         requests.selectData();
-
-        System.out.println("Closing...");
     }
 }
