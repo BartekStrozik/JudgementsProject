@@ -11,10 +11,15 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) throws IOException {
+        System.out.println("Initializig...");
+
+
         LoadDirectory loadDirectory = new LoadDirectory();
         List<Judgment> objects = loadDirectory.load();
 
         Requests requests = new Requests();
         requests.selectData();
+
+        System.out.println("Closing...");
     }
 }
