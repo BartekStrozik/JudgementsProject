@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class XJury extends Request{
+public class XJury extends AbstractCommand {
     public HashMap<Integer, List<Judgment>> amountMap = new HashMap<>();
 
     public void initializeMap(List<Judgment> judgments){

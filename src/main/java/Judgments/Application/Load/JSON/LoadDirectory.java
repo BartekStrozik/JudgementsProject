@@ -1,4 +1,4 @@
-package Judgments.Main;
+package Judgments.Application.Load;
 
 import Judgments.Data.CommonData;
 import Judgments.Objects.Judgment;

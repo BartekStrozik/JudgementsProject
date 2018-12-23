@@ -1,4 +1,4 @@
-package Judgments.Main;
+package Judgments.Application.Load;
 
 import java.io.BufferedReader;
 import java.io.File;
