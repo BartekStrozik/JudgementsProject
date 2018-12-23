@@ -9,70 +9,71 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class VIIICourts extends Request{
-    public HashMap<CourtType, List<Judgment>> courtTypeMap = new HashMap<>();
+public class GetAmountOfJudgmentsForCourtTypes extends AbstractCommand{
+    private HashMap<CourtType, Integer> courtTypeMap = new HashMap<>();
 
-    public void initializeHashMap(List<Judgment> judgments){
-        courtTypeMap.put(CourtType.COMMON,new ArrayList<>());
-        courtTypeMap.put(CourtType.SUPREME,new ArrayList<>());
-        courtTypeMap.put(CourtType.ADMINISTRATIVE,new ArrayList<>());
-        courtTypeMap.put(CourtType.CONSTITUTIONAL_TRIBUNAL,new ArrayList<>());
-        courtTypeMap.put(CourtType.NATIONAL_APPEAL_CHAMBER,new ArrayList<>());
-        courtTypeMap.put(CourtType.DEFAULT,new ArrayList<>());
+    private void initializeMap(){
+        courtTypeMap.put(CourtType.COMMON,0);
+        courtTypeMap.put(CourtType.SUPREME,0);
+        courtTypeMap.put(CourtType.ADMINISTRATIVE,0);
+        courtTypeMap.put(CourtType.CONSTITUTIONAL_TRIBUNAL,0);
+        courtTypeMap.put(CourtType.NATIONAL_APPEAL_CHAMBER,0);
+        courtTypeMap.put(CourtType.DEFAULT,0);
+    }
 
-        for(Judgment judgment : judgments){
+    private void solveAllTypes(){
+        for(Judgment judgment : CommonData.judgmentList){
+            Integer current;
             switch(judgment.courtType){
                 case COMMON:
-                    courtTypeMap.get(CourtType.COMMON).add(judgment);
+                    current = courtTypeMap.get(CourtType.COMMON);
+                    courtTypeMap.put(CourtType.COMMON,++current);
                     break;
                 case SUPREME:
-                    courtTypeMap.get(CourtType.SUPREME).add(judgment);
+                    current = courtTypeMap.get(CourtType.SUPREME);
+                    courtTypeMap.put(CourtType.SUPREME,++current);
                     break;
                 case ADMINISTRATIVE:
-                    courtTypeMap.get(CourtType.ADMINISTRATIVE).add(judgment);
+                    current = courtTypeMap.get(CourtType.ADMINISTRATIVE);
+                    courtTypeMap.put(CourtType.ADMINISTRATIVE,++current);
                     break;
                 case CONSTITUTIONAL_TRIBUNAL:
-                    courtTypeMap.get(CourtType.CONSTITUTIONAL_TRIBUNAL).add(judgment);
+                    current = courtTypeMap.get(CourtType.CONSTITUTIONAL_TRIBUNAL);
+                    courtTypeMap.put(CourtType.CONSTITUTIONAL_TRIBUNAL,++current);
                     break;
                 case NATIONAL_APPEAL_CHAMBER:
-                    courtTypeMap.get(CourtType.NATIONAL_APPEAL_CHAMBER).add(judgment);
+                    current = courtTypeMap.get(CourtType.NATIONAL_APPEAL_CHAMBER);
+                    courtTypeMap.put(CourtType.NATIONAL_APPEAL_CHAMBER,++current);
                     break;
                 case DEFAULT:
-                    courtTypeMap.get(CourtType.DEFAULT).add(judgment);
+                    current = courtTypeMap.get(CourtType.DEFAULT);
+                    courtTypeMap.put(CourtType.DEFAULT,++current);
                     break;
             }
         }
     }
 
-    private void getAnswer(String courtType){
-        initializeHashMap(CommonData.judgmentList);
-        System.out.println("Liczba orzeczeń typu "+courtType+":");
-        switch(courtType){
-            case "COMMON":
-                System.out.println(courtTypeMap.get(CourtType.COMMON).size());
-                break;
-            case "SUPREME":
-                System.out.println(courtTypeMap.get(CourtType.SUPREME).size());
-                break;
-            case "ADMINISTRATIVE":
-                System.out.println(courtTypeMap.get(CourtType.ADMINISTRATIVE).size());
-                break;
-            case "CONSTITUTIONAL_TRIBUNAL":
-                System.out.println(courtTypeMap.get(CourtType.CONSTITUTIONAL_TRIBUNAL).size());
-                break;
-            case "NATIONAL_APPEAL_CHAMBER":
-                System.out.println(courtTypeMap.get(CourtType.NATIONAL_APPEAL_CHAMBER).size());
-                break;
-            case "DEFAULT":
-                System.out.println(courtTypeMap.get(CourtType.DEFAULT).size());
-                break;
+    private void solveSpecificType(CourtType courtType){
+        for(Judgment judgment : CommonData.judgmentList){
+            if(judgment.courtType.equals(courtType)){
+                Integer current = courtTypeMap.get(courtType);
+                courtTypeMap.put(courtType,++current);
+            }
         }
     }
 
-    @Override
-    public void launchRequest(String[] args) {
-        for(int i=0; i<args.length; i++) {
-            getAnswer(args[i]);
+    public Result solveResult(String[] args) {
+        initializeMap();
+        if(args.length==0){
+            solveAllTypes();
         }
+        else{
+            CourtType[] courtTypes = CourtType.stringParser(args);
+            for(int i=0; i<courtTypes.length; i++) {
+                solveSpecificType(courtTypes[i]);
+            }
+        }
+        Result result = new Result(courtTypeMap);
+        return result;
     }
 }

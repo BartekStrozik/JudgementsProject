@@ -1,20 +1,17 @@
-package Judgments.Main.UserCommands;
+package Judgments.Application.UserCommands;
 
 import Judgments.Commands.*;
 
-import java.util.HashMap;
-
 public class LineToCommand {
-    public FunctionInvoker functionInvoker = new FunctionInvoker();
+    public FunctionSolver functionSolver = new FunctionSolver();
 
-    public void printAnswer(String line){
+    public Result answer(String line){
         String[] splittedLine = parse(line);
 
         String command = getCommand(splittedLine);
         String[] arguments = getArguments(splittedLine);
 
-        functionInvoker.invoke(command,arguments);
-
+        return functionSolver.solve(command,arguments);
     }
 
     public String[] parse(String line){

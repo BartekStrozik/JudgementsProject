@@ -5,66 +5,50 @@ import Judgments.Objects.Judge;
 import Judgments.Objects.Judgment;
 import Judgments.Objects.ReferencedRegulation;
 
-import javax.print.attribute.HashAttributeSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class IXRegulations extends Request{
-    public HashMap<String, List<Judgment>> regulationsMap = new HashMap<>();
+public class GetTopRegulations extends AbstractCommand {
+    private HashMap<String, Integer> regulationsMap = new HashMap<>();
 
-    public void initializeMap(){
+    private void initializeMap(){
         for(Judgment judgment : CommonData.judgmentList){
             for(int i=0; i<judgment.referencedRegulations.size(); i++){
-                regulationsMap.put(judgment.referencedRegulations.get(i).journalTitle,new ArrayList<>());
+                regulationsMap.put(judgment.referencedRegulations.get(i).journalTitle,0);
             }
         }
 
         for(Judgment judgment : CommonData.judgmentList){
             for(int i=0; i<judgment.referencedRegulations.size(); i++){
-                regulationsMap.get(judgment.referencedRegulations.get(i).journalTitle).add(judgment);
+                Integer current = regulationsMap.get(judgment.referencedRegulations.get(i).journalTitle);
+                regulationsMap.put(judgment.referencedRegulations.get(i).journalTitle,++current);
             }
         }
     }
-    @Override
-    public void launchRequest(String[] args) {
-        initializeMap();
-        List<ReferencedRegulation> result = top10();
-        int i=1;
-        for(ReferencedRegulation regulation : result){
-            System.out.print("Przywoływany przepis nr ");
-            System.out.print(i);
-            System.out.println(":");
-            System.out.println(regulation.journalTitle);
-            System.out.print("Był przywoływany razy: ");
-            System.out.println(regulation.amount);
-            System.out.println("");
-            i++;
-        }
-    }
 
-    public List<ReferencedRegulation> top10(){
+    private List<ReferencedRegulation> topN(int topN){
         int N = regulationsMap.size();
+        System.out.println(N);
         ReferencedRegulation array[] = new ReferencedRegulation[N];
         int i=0;
-        for(Map.Entry<String,List<Judgment>> entry : this.regulationsMap.entrySet()){
+        for(Map.Entry<String,Integer> entry : this.regulationsMap.entrySet()){
             array[i] = new ReferencedRegulation();
             array[i].journalTitle = entry.getKey();
-            array[i].amount = entry.getValue().size();
+            array[i].amount = entry.getValue();
             i++;
         }
         quickSort(array,0,N-1);
 
-        List<ReferencedRegulation> topTen = new ArrayList<>();
-        for(int j=0; j<10; j++){
-            topTen.add(array[N-1 - j]);
+        List<ReferencedRegulation> top = new ArrayList<>();
+        for(int j=0; j<(topN<N?topN:N); j++){
+            top.add(array[N-1 - j]);
         }
-
-        return topTen;
+        return top;
     }
 
-    public void quickSort(ReferencedRegulation array[], int l, int r){
+    private void quickSort(ReferencedRegulation array[], int l, int r){
         if(l<r){
             int q = partition(array,l,r);
             quickSort(array,l,q-1);
@@ -72,7 +56,7 @@ public class IXRegulations extends Request{
         }
     }
 
-    public int partition(ReferencedRegulation array[],int low, int high){
+    private int partition(ReferencedRegulation array[],int low, int high){
         int j=low-1;
         for(int i=low; i<high;i++){
             if(array[i].amount < array[high].amount){
@@ -84,9 +68,27 @@ public class IXRegulations extends Request{
         return j+1;
     }
 
-    public void swap(ReferencedRegulation array[], int x, int y){
+    private void swap(ReferencedRegulation array[], int x, int y){
         ReferencedRegulation tmp = array[x];
         array[x]=array[y];
         array[y]=tmp;
+    }
+
+    @Override
+    public Result solveResult(String[] args) {
+        initializeMap();
+        if(args.length==0){
+            List<ReferencedRegulation> topList = topN(10);
+            Result result = new Result(topList);
+            return result;
+        }
+        else if(args.length==1){
+            List<ReferencedRegulation> topList = topN(Integer.parseInt(args[0]));
+            Result result = new Result(topList);
+            return result;
+        }
+        else{
+            throw new IllegalArgumentException("Only one argument demanded.");
+        }
     }
 }

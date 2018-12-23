@@ -2,10 +2,10 @@ package Judgments.Commands;
 
 import java.util.HashMap;
 
-public class FunctionInvoker {
+public class FunctionSolver {
     HashMap<String, AbstractCommand> requestMap = new HashMap<>();
 
-    public FunctionInvoker(){
+    public FunctionSolver(){
         requestMap.put("content",new GetContent());
         requestMap.put("rubrum",new GetMetrics());
         requestMap.put("judge",new GetAmountOfJudgmentsForOneJudge());
@@ -16,8 +16,9 @@ public class FunctionInvoker {
         requestMap.put("jury",new GetAmountOfJudgmentsForJurySizes());
     }
 
-    public void invoke(String command, String[] arguments){
+    public Result solve(String command, String[] arguments){
         AbstractCommand abstractCommand = requestMap.get(command);
-        abstractCommand.launchRequest(arguments);
+        Result result = abstractCommand.solveResult(arguments);
+        return result;
     }
 }

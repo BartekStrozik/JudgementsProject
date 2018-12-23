@@ -1,8 +1,11 @@
-package Judgments.Main.UserCommands;
+package Judgments.Application.UserCommands;
 
-import Judgments.Commands.*;
+import Judgments.Commands.Result;
+import Judgments.Objects.CourtType;
+import Judgments.Objects.Judgment;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 public class Requests {
@@ -13,7 +16,8 @@ public class Requests {
         while(true){
             String line = scanner.nextLine();
             if(line.equals("exit"))break;
-            lineToCommand.printAnswer(line);
+            Result result = lineToCommand.answer(line);
+            System.out.println(result);
         }
     }
 }

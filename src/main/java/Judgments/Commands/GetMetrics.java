@@ -4,40 +4,35 @@ import Judgments.Objects.CourtCase;
 import Judgments.Data.CommonData;
 import Judgments.Objects.Judgment;
 
-public class IVRubrum extends Request{
-    /*public List<String> ManyRubrumsToString(List<Judgment> judgmentList){
-        List<String> result = new ArrayList<>();
-        for(Judgment j : judgmentList){
-            result.add(j.toString());
-        }
-        return result;
-    }
+import java.util.ArrayList;
+import java.util.List;
 
-    public List<String> getAnswer(String request, List<Judgment> set){
-        List<Judgment> judgments = new ArrayList<>();
-        for(Judgment judgment : set){
-            for(int i=0; i<judgment.courtCases.size(); i++){
-                if(request.equals(judgment.courtCases.get(i).caseNumber)){
-                    judgments.add(judgment);
+public class GetMetrics extends AbstractCommand {
+    private String searchForJudgment(String signature){
+        String foundedJudgment = null;
+        for (Judgment judgment : CommonData.judgmentList) {
+            for(CourtCase courtCase : judgment.courtCases){
+                if(courtCase.caseNumber.equals(signature)){
+                    foundedJudgment = judgment.toString();
                 }
             }
         }
-        return ManyRubrumsToString(judgments);
-    }*/
-
-    public void getAnswer(String signature){
-        for (Judgment judgment : CommonData.judgmentList) {
-            for(CourtCase courtCase : judgment.courtCases){
-                if(signature.equals(courtCase.caseNumber))
-                    System.out.println(judgment);
-            }
-        }
+        if(foundedJudgment!=null)return foundedJudgment;
+        else throw new NullPointerException("No such case Number in a judgment database");
     }
 
     @Override
-    public void launchRequest(String[] args) {
-        for(int i=0; i<args.length; i++) {
-            getAnswer(args[i]);
+    public Result solveResult(String[] args) {
+        List<String> solution = new ArrayList<>();
+        if(args.length==0){
+            throw new NullPointerException("This command demands at least one argument");
         }
+        else{
+            for(int i=0; i<args.length; i++) {
+                solution.add(searchForJudgment(args[i]));
+            }
+        }
+        Result result = new Result(solution);
+        return result;
     }
 }

@@ -1,15 +1,20 @@
-package Judgments.Main.UserCommands;
+package Judgments;
 
-import Judgments.Main.Load.LoadDirectory;
+import Judgments.Application.Load.HTML.HTMLDocuments;
+import Judgments.Application.Load.JSON.LoadDirectory;
+import Judgments.Application.UserCommands.Requests;
 import Judgments.Objects.Judgment;
+import org.jsoup.nodes.Document;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        System.out.println("Initializig...");
-
         LoadDirectory loadDirectory = new LoadDirectory();
         List<Judgment> objects = loadDirectory.load();
 

@@ -1,4 +1,4 @@
-package Judgments.Application.Load;
+package Judgments.Application.Load.JSON;
 
 import Judgments.Data.CommonData;
 import Judgments.Objects.Judgment;

@@ -7,76 +7,102 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-public class VIIMonths extends Request{
-    public HashMap<String, List<Judgment>> months = new HashMap<>();
+public class GetAmountOfJudgmentsForMonths extends AbstractCommand {
+    private HashMap<String, Integer> months = new HashMap<>();
 
-    public void initializeMap(List<Judgment> judgments){
-        months.put("styczeń",new LinkedList<>());
-        months.put("luty",new LinkedList<>());
-        months.put("marzec",new LinkedList<>());
-        months.put("kwiecień",new LinkedList<>());
-        months.put("maj",new LinkedList<>());
-        months.put("czerwiec",new LinkedList<>());
-        months.put("lipiec",new LinkedList<>());
-        months.put("sierpień",new LinkedList<>());
-        months.put("wrzesień",new LinkedList<>());
-        months.put("październik",new LinkedList<>());
-        months.put("listopad",new LinkedList<>());
-        months.put("grudzień",new LinkedList<>());
+    private void initializeMap(){
+        months.put("styczeń",0);
+        months.put("luty",0);
+        months.put("marzec",0);
+        months.put("kwiecień",0);
+        months.put("maj",0);
+        months.put("czerwiec",0);
+        months.put("lipiec",0);
+        months.put("sierpień",0);
+        months.put("wrzesień",0);
+        months.put("październik",0);
+        months.put("listopad",0);
+        months.put("grudzień",0);
+    }
 
-        for(Judgment j : judgments){
-            switch(j.judgmentDate.substring(5,7)){
+    private void solveAllMonths(){
+        for(Judgment judgment : CommonData.judgmentList){
+            Integer current;
+            switch(judgment.judgmentDate.substring(5,7)){
                 case "01":
-                    months.get("styczeń").add(j);
+                    current = months.get("styczeń");
+                    months.put("styczeń",++current);
                     break;
                 case "02":
-                    months.get("luty").add(j);
+                    current = months.get("luty");
+                    months.put("luty",++current);
                     break;
                 case "03":
-                    months.get("marzec").add(j);
+                    current = months.get("marzec");
+                    months.put("marzec",++current);
                     break;
                 case "04":
-                    months.get("kwiecień").add(j);
+                    current = months.get("kwiecień");
+                    months.put("kwiecień",++current);
                     break;
                 case "05":
-                    months.get("maj").add(j);
+                    current = months.get("maj");
+                    months.put("maj",++current);
                     break;
                 case "06":
-                    months.get("czerwiec").add(j);
+                    current = months.get("czerwiec");
+                    months.put("czerwiec",++current);
                     break;
                 case "07":
-                    months.get("lipiec").add(j);
+                    current = months.get("lipiec");
+                    months.put("lipiec",++current);
                     break;
                 case "08":
-                    months.get("sierpień").add(j);
+                    current = months.get("sierpień");
+                    months.put("sierpień",++current);
                     break;
                 case "09":
-                    months.get("wrzesień").add(j);
+                    current = months.get("wrzesień");
+                    months.put("wrzesień",++current);
                     break;
                 case "10":
-                    months.get("październik").add(j);
+                    current = months.get("październik");
+                    months.put("październik",++current);
                     break;
                 case "11":
-                    months.get("listopad").add(j);
+                    current = months.get("listopad");
+                    months.put("listopad",++current);
                     break;
                 case "12":
-                    months.get("grudzień").add(j);
+                    current = months.get("grudzień");
+                    months.put("grudzień",++current);
                     break;
-                default: break;
+                default:break;
             }
         }
     }
 
-    public void getAnswer(String month){
-        initializeMap(CommonData.judgmentList);
-        System.out.println("Liczba orzeczeń wydanych w miesiącu "+month+":");
-        System.out.println(months.get(month).size());
+    private void solveSpecificMonth(String month){
+        for(Judgment judgment : CommonData.judgmentList) {
+            String monthWord = MonthParser.parse(judgment.judgmentDate.substring(5,7));
+            if(monthWord.equals(month)){
+                Integer current = months.get(month);
+                months.put(month,++current);
+            }
+        }
     }
 
     @Override
-    public void launchRequest(String[] args) {
-        for(int i=0; i<args.length; i++) {
-            getAnswer(args[i]);
+    public Result solveResult(String[] args) {
+        initializeMap();
+        if(args.length==0){
+            solveAllMonths();
         }
+        else{
+            for(int i=0; i<args.length; i++) {
+                solveSpecificMonth(args[i]);
+            }
+        }
+        return new Result(months);
     }
 }
