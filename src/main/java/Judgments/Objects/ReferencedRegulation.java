@@ -8,6 +8,10 @@ public class ReferencedRegulation {
     public String text;
     public int amount;
 
+    public String toString(){
+        return journalTitle;
+    }
+
     public boolean equals(Object other){
         if (this == other)
             return true;

@@ -1,0 +1,18 @@
+Welcome to my application!
+
+You have at your disposal very big collection of data.
+Data represents judgments which were given by different courts in different juries, time etc.
+Data contains informations about date in which judgments were given, content of judgments, 
+court types, judges role and regulations on which were sentences of judgments based on.
+
+Judgments are collected in two big containers depending on the format of files: format JSON and format HTML.
+You might choose which database of judgments are you interested in: JSON files or HTML files.
+
+Use of application is about typing commands with below format:
+command_name "arg1" "arg2" ... "argn"
+
+First command you have to use is command "load", you can type it with argument "html" or "json", so please type one from two of the following lines:
+load "html"
+load "json"
+
+If you need any help, type command "help"

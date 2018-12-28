@@ -1,4 +1,4 @@
-package Judgments.Application.Load.JSON;
+package Judgments.Load.JSON;
 
 import java.io.BufferedReader;
 import java.io.File;

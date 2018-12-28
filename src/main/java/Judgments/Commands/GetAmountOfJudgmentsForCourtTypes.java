@@ -1,12 +1,10 @@
 package Judgments.Commands;
 
 import Judgments.Objects.CourtType;
-import Judgments.Data.CommonData;
+import Judgments.Load.CommonData;
 import Judgments.Objects.Judgment;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 
 public class GetAmountOfJudgmentsForCourtTypes extends AbstractCommand{
@@ -73,7 +71,6 @@ public class GetAmountOfJudgmentsForCourtTypes extends AbstractCommand{
                 solveSpecificType(courtTypes[i]);
             }
         }
-        Result result = new Result(courtTypeMap);
-        return result;
+        return new Result(courtTypeMap);
     }
 }

@@ -1,34 +1,42 @@
 package Judgments.Commands;
 
 public class MonthParser {
-    public static String parse(String monthNumber){
-        switch(monthNumber){
-            case "01":
-                return "styczeń";
-            case "02":
-                return "luty";
-            case "03":
-                return "marzec";
-            case "04":
-                return "kwiecień";
-            case "05":
-                return "maj";
-            case "06":
-                return "czerwiec";
-            case "07":
-                return "lipiec";
-            case "08":
-                return "sierpień";
-            case "09":
-                return "wrzesień";
-            case "10":
-                return "październik";
-            case "11":
-                return "listopad";
-            case "12":
-                return "grudzień";
+    private static String parse(String monthWord){
+        switch(monthWord){
+            case "styczeń":
+                return "01";
+            case "luty":
+                return "02";
+            case "marzec":
+                return "03";
+            case "kwiecień":
+                return "04";
+            case "maj":
+                return "05";
+            case "czerwiec":
+                return "06";
+            case "lipiec":
+                return "07";
+            case "sierpień":
+                return "08";
+            case "wrzesień":
+                return "09";
+            case "paźdzernik":
+                return "10";
+            case "listopad":
+                return "11";
+            case "grudzień":
+                return "12";
             default:
                 return "";
         }
+    }
+
+    public static String[] monthsParser(String[] monthsWords){
+        String[] monthsNumbers = new String[monthsWords.length];
+        for(int i=0; i<monthsWords.length; i++){
+            monthsNumbers[i] = parse(monthsWords[i]);
+        }
+        return monthsNumbers;
     }
 }

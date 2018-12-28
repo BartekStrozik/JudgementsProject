@@ -1,93 +1,40 @@
 package Judgments.Commands;
 
-import Judgments.Data.CommonData;
+import Judgments.Load.CommonData;
 import Judgments.Objects.Judgment;
 
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 
 public class GetAmountOfJudgmentsForMonths extends AbstractCommand {
     private HashMap<String, Integer> months = new HashMap<>();
 
     private void initializeMap(){
-        months.put("styczeń",0);
-        months.put("luty",0);
-        months.put("marzec",0);
-        months.put("kwiecień",0);
-        months.put("maj",0);
-        months.put("czerwiec",0);
-        months.put("lipiec",0);
-        months.put("sierpień",0);
-        months.put("wrzesień",0);
-        months.put("październik",0);
-        months.put("listopad",0);
-        months.put("grudzień",0);
+        months.put("01",0);
+        months.put("02",0);
+        months.put("03",0);
+        months.put("04",0);
+        months.put("05",0);
+        months.put("06",0);
+        months.put("07",0);
+        months.put("08",0);
+        months.put("09",0);
+        months.put("10",0);
+        months.put("11",0);
+        months.put("12",0);
     }
 
     private void solveAllMonths(){
         for(Judgment judgment : CommonData.judgmentList){
-            Integer current;
-            switch(judgment.judgmentDate.substring(5,7)){
-                case "01":
-                    current = months.get("styczeń");
-                    months.put("styczeń",++current);
-                    break;
-                case "02":
-                    current = months.get("luty");
-                    months.put("luty",++current);
-                    break;
-                case "03":
-                    current = months.get("marzec");
-                    months.put("marzec",++current);
-                    break;
-                case "04":
-                    current = months.get("kwiecień");
-                    months.put("kwiecień",++current);
-                    break;
-                case "05":
-                    current = months.get("maj");
-                    months.put("maj",++current);
-                    break;
-                case "06":
-                    current = months.get("czerwiec");
-                    months.put("czerwiec",++current);
-                    break;
-                case "07":
-                    current = months.get("lipiec");
-                    months.put("lipiec",++current);
-                    break;
-                case "08":
-                    current = months.get("sierpień");
-                    months.put("sierpień",++current);
-                    break;
-                case "09":
-                    current = months.get("wrzesień");
-                    months.put("wrzesień",++current);
-                    break;
-                case "10":
-                    current = months.get("październik");
-                    months.put("październik",++current);
-                    break;
-                case "11":
-                    current = months.get("listopad");
-                    months.put("listopad",++current);
-                    break;
-                case "12":
-                    current = months.get("grudzień");
-                    months.put("grudzień",++current);
-                    break;
-                default:break;
-            }
+            Integer current = months.get(judgment.judgmentDate.substring(5,7));
+            months.put(judgment.judgmentDate.substring(5,7),++current);
         }
     }
 
-    private void solveSpecificMonth(String month){
+    private void solveSpecificMonth(String monthNumber){
         for(Judgment judgment : CommonData.judgmentList) {
-            String monthWord = MonthParser.parse(judgment.judgmentDate.substring(5,7));
-            if(monthWord.equals(month)){
-                Integer current = months.get(month);
-                months.put(month,++current);
+            if(judgment.judgmentDate.substring(5,7).equals(monthNumber)){
+                Integer current = months.get(monthNumber);
+                months.put(monthNumber,++current);
             }
         }
     }
@@ -99,8 +46,9 @@ public class GetAmountOfJudgmentsForMonths extends AbstractCommand {
             solveAllMonths();
         }
         else{
+            String[] monthsNumbers = MonthParser.monthsParser(args);
             for(int i=0; i<args.length; i++) {
-                solveSpecificMonth(args[i]);
+                solveSpecificMonth(monthsNumbers[i]);
             }
         }
         return new Result(months);

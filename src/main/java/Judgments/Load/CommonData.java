@@ -1,4 +1,4 @@
-package Judgments.Data;
+package Judgments.Load;
 
 import Judgments.Objects.Judgment;
 

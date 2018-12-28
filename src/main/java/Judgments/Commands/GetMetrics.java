@@ -1,7 +1,7 @@
 package Judgments.Commands;
 
 import Judgments.Objects.CourtCase;
-import Judgments.Data.CommonData;
+import Judgments.Load.CommonData;
 import Judgments.Objects.Judgment;
 
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ public class GetMetrics extends AbstractCommand {
             }
         }
         if(foundedJudgment!=null)return foundedJudgment;
-        else throw new NullPointerException("No such case Number in a judgment database");
+        else throw new NullPointerException("No such case number in a judgment database");
     }
 
     @Override
@@ -32,7 +32,6 @@ public class GetMetrics extends AbstractCommand {
                 solution.add(searchForJudgment(args[i]));
             }
         }
-        Result result = new Result(solution);
-        return result;
+        return new Result(solution);
     }
 }

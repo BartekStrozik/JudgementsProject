@@ -23,17 +23,23 @@ public class Result {
         StringBuilder builder = new StringBuilder();
         if(this.result instanceof HashMap){
             for(Map.Entry entry : ((HashMap<Object, Object>) this.result).entrySet()){
-                builder.append(entry.getKey())
-                        .append('\n')
-                        .append("Number of judgments: ")
-                        .append(entry.getValue())
-                        .append('\n');
+                if((Integer)entry.getValue() > 0) {
+
+                    builder.append(entry.getKey().toString())
+                            .append('\n')
+                            .append("Number of judgments: ")
+                            .append(entry.getValue().toString())
+                            .append('\n');
+                }
             }
         }
         else if(this.result instanceof List){
             for(Object obj : (List) this.result){
                 builder.append(obj.toString()).append('\n');
             }
+        }
+        else if(this.result instanceof String){
+            builder.append(this.result);
         }
         return builder.toString();
     }

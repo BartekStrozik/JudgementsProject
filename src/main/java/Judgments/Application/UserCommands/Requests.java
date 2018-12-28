@@ -1,23 +1,14 @@
 package Judgments.Application.UserCommands;
 
-import Judgments.Commands.Result;
-import Judgments.Objects.CourtType;
-import Judgments.Objects.Judgment;
+import Judgments.Frame;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.io.IOException;
 
 public class Requests {
-    LineToCommand lineToCommand = new LineToCommand();
+    private LineToCommand lineToCommand = new LineToCommand();
+    private Frame frame;
 
-    public void selectData(){
-        Scanner scanner = new Scanner(System.in);
-        while(true){
-            String line = scanner.nextLine();
-            if(line.equals("exit"))break;
-            Result result = lineToCommand.answer(line);
-            System.out.println(result);
-        }
+    public void selectData() throws IOException {
+        this.frame = new Frame();
     }
 }

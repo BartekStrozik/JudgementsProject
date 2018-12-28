@@ -1,4 +1,4 @@
-package Judgments.Application.Load.JSON;
+package Judgments.Load.JSON;
 
 import Judgments.Objects.Judgment;
 import com.google.gson.Gson;

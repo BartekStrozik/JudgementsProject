@@ -1,6 +1,5 @@
-package Judgments.Application.Load.JSON;
+package Judgments.Load.JSON;
 
-import Judgments.Data.CommonData;
 import Judgments.Objects.Judgment;
 
 import java.io.File;
@@ -9,17 +8,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class LoadDirectory {
-    public String getDirectoryName(){
-        Scanner scanner = new Scanner(System.in);
-        String fileName = scanner.nextLine();
-        return fileName;
-    }
-
     public List<Judgment> load() throws IOException {
-        File directory = new File(getDirectoryName());
+        File directory = new File("json");
         List<String> stringList= strings(directory);
         List<Judgment> objects = objects(stringList);
-        CommonData.judgmentList = objects;
         return objects;
     }
 

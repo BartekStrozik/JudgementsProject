@@ -14,11 +14,12 @@ public class FunctionSolver {
         requestMap.put("courts",new GetAmountOfJudgmentsForCourtTypes());
         requestMap.put("regulations",new GetTopRegulations());
         requestMap.put("jury",new GetAmountOfJudgmentsForJurySizes());
+        requestMap.put("help",new Help());
+        requestMap.put("load",new CommandLoad());
     }
 
     public Result solve(String command, String[] arguments){
         AbstractCommand abstractCommand = requestMap.get(command);
-        Result result = abstractCommand.solveResult(arguments);
-        return result;
+        return abstractCommand.solveResult(arguments);
     }
 }

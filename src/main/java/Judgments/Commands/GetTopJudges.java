@@ -1,6 +1,6 @@
 package Judgments.Commands;
 
-import Judgments.Data.CommonData;
+import Judgments.Load.CommonData;
 import Judgments.Objects.Judge;
 import Judgments.Objects.Judgment;
 
@@ -74,16 +74,14 @@ public class GetTopJudges extends AbstractCommand {
         initializeMap();
         if(args.length==0){
             List<Judge> topList = topN(10);
-            Result result = new Result(topList);
-            return result;
+            return new Result(topList);
         }
         else if(args.length==1){
             List<Judge> topList = topN(Integer.parseInt(args[0]));
-            Result result = new Result(topList);
-            return result;
+            return new Result(topList);
         }
         else{
-            throw new IllegalArgumentException("Only one argument demanded.");
+            throw new IllegalArgumentException("Only one argument demanded");
         }
     }
 }

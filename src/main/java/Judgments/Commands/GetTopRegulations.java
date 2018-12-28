@@ -1,7 +1,6 @@
 package Judgments.Commands;
 
-import Judgments.Data.CommonData;
-import Judgments.Objects.Judge;
+import Judgments.Load.CommonData;
 import Judgments.Objects.Judgment;
 import Judgments.Objects.ReferencedRegulation;
 
@@ -30,7 +29,6 @@ public class GetTopRegulations extends AbstractCommand {
 
     private List<ReferencedRegulation> topN(int topN){
         int N = regulationsMap.size();
-        System.out.println(N);
         ReferencedRegulation array[] = new ReferencedRegulation[N];
         int i=0;
         for(Map.Entry<String,Integer> entry : this.regulationsMap.entrySet()){
@@ -79,16 +77,14 @@ public class GetTopRegulations extends AbstractCommand {
         initializeMap();
         if(args.length==0){
             List<ReferencedRegulation> topList = topN(10);
-            Result result = new Result(topList);
-            return result;
+            return new Result(topList);
         }
         else if(args.length==1){
             List<ReferencedRegulation> topList = topN(Integer.parseInt(args[0]));
-            Result result = new Result(topList);
-            return result;
+            return new Result(topList);
         }
         else{
-            throw new IllegalArgumentException("Only one argument demanded.");
+            throw new IllegalArgumentException("Only one argument demanded");
         }
     }
 }

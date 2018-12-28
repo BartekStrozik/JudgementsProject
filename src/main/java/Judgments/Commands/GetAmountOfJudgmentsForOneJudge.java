@@ -1,13 +1,10 @@
 package Judgments.Commands;
 
-import Judgments.Data.CommonData;
-import Judgments.Objects.CourtType;
+import Judgments.Load.CommonData;
 import Judgments.Objects.Judge;
 import Judgments.Objects.Judgment;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class GetAmountOfJudgmentsForOneJudge extends AbstractCommand {
     private HashMap<Judge, Integer> judgesMap = new HashMap<>();
@@ -51,7 +48,6 @@ public class GetAmountOfJudgmentsForOneJudge extends AbstractCommand {
                 solveSpecificJudge(args[i]);
             }
         }
-        Result result = new Result(judgesMap);
-        return result;
+        return new Result(judgesMap);
     }
 }

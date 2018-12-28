@@ -6,7 +6,11 @@ public enum CourtType {
     ADMINISTRATIVE,
     CONSTITUTIONAL_TRIBUNAL,
     NATIONAL_APPEAL_CHAMBER,
-    DEFAULT;
+    DEFAULT,
+
+    PROVINCIAL_ADMINISTRATIVE,
+    SUPREME_ADMINISTRATIVE,
+    ;
 
     public static CourtType[] stringParser(String[] array){
         CourtType[] equivalentArray = new CourtType[array.length];
@@ -30,8 +34,8 @@ public enum CourtType {
                 case "DEFAULT":
                     equivalentArray[i]=CourtType.DEFAULT;
                     break;
-                    default: throw new IllegalArgumentException(
-                            "No such a courtType like " + array[i] + ".");
+                default:  throw new IllegalArgumentException(
+                        "No such a courtType like " + array[i]);
 
             }
         }

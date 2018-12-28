@@ -9,6 +9,23 @@ public class Judge {
     public List<SpecialRole> specialRoles;
     public Integer amount;
 
+    public Judge(){}
+
+    public Judge(String name, List<SpecialRole> specialRoles){
+        this.name = name;
+        this.specialRoles = specialRoles;
+    }
+
+    public Judge(String name, String function, List<SpecialRole> specialRoles){
+        this.name = name;
+        this.function = function;
+        this.specialRoles = specialRoles;
+    }
+
+    public String toString(){
+        return name;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

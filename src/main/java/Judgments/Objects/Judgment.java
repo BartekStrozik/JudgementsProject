@@ -27,24 +27,42 @@ public class Judgment {
     public String toString(){
         StringBuilder stringBuilder = new StringBuilder();
 
-        for(Integer i=0; i<this.courtCases.size(); i++) {
+        for(int i=0; i<this.courtCases.size(); i++) {
+            //Parsowanie zliczania kolejnych sygnatur na stringi numerów
             Integer j = i+1;
             String number = j.toString();
-            stringBuilder.append("Sygnatura orzeczenia numer "+j+": "+this.courtCases.get(i).caseNumber+'\n');
+            stringBuilder.append("Sygnatura orzeczenia numer ")
+                    .append(number)
+                    .append(": ")
+                    .append(this.courtCases.get(i).caseNumber)
+                    .append('\n');
         }
 
-        stringBuilder.append("Data wydania orzeczenia: " + this.judgmentDate+'\n');
-        stringBuilder.append("Rodzaj sądu: " + this.courtType+'\n');
+        stringBuilder.append("Data wydania orzeczenia: ")
+                .append(this.judgmentDate)
+                .append("\n")
+                .append("Rodzaj sądu: ")
+                .append(this.courtType)
+                .append("\n");
+
         stringBuilder.append("Sędziowie:"+'\n');
         for(Judge j : judges){
-            stringBuilder.append("    Imię: " + j.name+'\n');
-            stringBuilder.append("    Funkcja: " + j.function+'\n');
-            stringBuilder.append("    Role:"+'\n');
+            stringBuilder.append("    Imię: ")
+                    .append(j.name)
+                    .append('\n')
+                    .append("    Funkcja: ")
+                    .append(j.function)
+                    .append('\n')
+                    .append("    Role:")
+                    .append('\n');
+
             for(SpecialRole role : j.specialRoles){
-                stringBuilder.append("        " + role+'\n');
+                stringBuilder.append("        ")
+                        .append(role)
+                        .append('\n');
             }
+            stringBuilder.append('\n');
         }
-        String result = stringBuilder.toString();
-        return result;
+        return stringBuilder.toString();
     }
 }

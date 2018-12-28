@@ -1,0 +1,26 @@
+Program is about typing commands in order to select informations about judgments
+Commands you are allowed to type:
+
+content -- select informations about content of judgment given as argument, at least 1 arg
+Example: content "" ""
+rubrum -- select informations about content of judgment given as argument, at least 1 arg
+Example: rubrum "" ""
+
+months -- select informations about how many judgment were given in specific months, args optional
+Example: months "styczeń" "marzec" "czerwiec"
+courts -- select informations about how many judgment were given by specific types of courts, args optional
+Example: courts "COMMON" "SUPREME"
+jury -- select informations about how many judgment were given in specific sizes of courts (amount of judges), args optional
+Example: jury 3 7
+judge -- select informations about how many judgment were given for judge who participate, args optional
+Example: judge "Wojciech Katner"
+
+judges -- select information about most active judges, one arg optional (default: 10)
+Example: judges 1
+regulations -- select information about most often referenced regulations, one arg optional (default: 10)
+Example: regulations 15
+
+help -- select informations about commands and using app
+Example: [Remind, how you get here! :)]
+load -- load judgments contained in specific format of files, one argument
+Example: load "html"

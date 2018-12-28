@@ -1,11 +1,9 @@
 package Judgments.Commands;
 
-import Judgments.Data.CommonData;
+import Judgments.Load.CommonData;
 import Judgments.Objects.Judgment;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class GetAmountOfJudgmentsForJurySizes extends AbstractCommand {
     private HashMap<Integer, Integer> amountMap = new HashMap<>();
@@ -43,7 +41,6 @@ public class GetAmountOfJudgmentsForJurySizes extends AbstractCommand {
                 solveSpecificNumber(Integer.parseInt(args[i]));
             }
         }
-        Result result = new Result(amountMap);
-        return result;
+        return new Result(amountMap);
     }
 }
