@@ -12,7 +12,7 @@ import java.util.*;
 
 public class HTMLDocuments {
     public List<Judgment> getJudgments(){
-        File file = new File("C:\\Users\\barte\\Desktop\\Semestr 3\\Obiektowe\\Judgments\\cbosa");
+        File file = new File("cbosa");
         List<Document> list = new ArrayList<>();
         try {
             pullJsoupDocuments(file, list);
@@ -54,10 +54,6 @@ public class HTMLDocuments {
         setCourtType(newJudgment, map);
         newJudgment.referencedRegulations = new ArrayList<>();
         setRegulations(newJudgment, map);
-
-        //setParameters(newJudgment, getFields(document));
-
-        //newJudgment.textContent = setTextContent(newJudgment, document);
         return newJudgment;
     }
 

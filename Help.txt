@@ -2,9 +2,9 @@ Program is about typing commands in order to select informations about judgments
 Commands you are allowed to type:
 
 content -- select informations about content of judgment given as argument, at least 1 arg
-Example: content "" ""
+Example: content "III SA 2270/03" "II SA/Gd 1160/01"
 rubrum -- select informations about content of judgment given as argument, at least 1 arg
-Example: rubrum "" ""
+Example: rubrum "III SA 2270/03" "II SA/Gd 1160/01"
 
 months -- select informations about how many judgment were given in specific months, args optional
 Example: months "styczeń" "marzec" "czerwiec"
@@ -21,6 +21,6 @@ regulations -- select information about most often referenced regulations, one a
 Example: regulations 15
 
 help -- select informations about commands and using app
-Example: [Remind, how you get here! :)]
+Example: [Remind, how did you get here! :)]
 load -- load judgments contained in specific format of files, one argument
 Example: load "html"
